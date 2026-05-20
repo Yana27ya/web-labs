@@ -288,138 +288,122 @@ input:checked + .ios-slider:before {
 .next-btn { right: 15px; }
 
 .ios-footer { border-radius: 0; border: none; border-top: 1px solid var(--border-color); background: var(--header-bg); margin-bottom: 0; }
-
 /* =======================================================
-   ПОВНА АДАТАЦІЯ ПІД ДЕСКТОП, ПЛАНШЕТ ТА ТЕЛЕФОН (iOS СТИЛЬ)
+   ГЛОБАЛЬНІ НАЛАШТУВАННЯ ДЛЯ ПРАВИЛЬНОЇ ШИРИНИ
    ======================================================= */
-
-/* 1. ПЛАНШЕТИ (Ширина екрана менше 992px) */
-@media (max-width: 992px) {
-    .glass-container {
-        padding: 15px;
-    }
-    
-    .creative-profile {
-        gap: 30px;
-        padding: 30px;
-    }
-
-    .profile-pic {
-        width: 180px;
-        height: 180px;
-        border-radius: 35px;
-    }
-
-    .bio-content .greeting {
-        font-size: 2rem;
-    }
-
-    .mood-cards-container {
-        gap: 15px;
-    }
-
-    .flip-card {
-        width: 190px;
-        height: 250px;
-    }
+html, body {
+    max-width: 100%;
+    overflow-x: hidden; /* Повністю блокує появу бічного скролу на телефонах */
 }
 
-/* 2. ВЕЛИКІ ТЕЛЕФОНИ / СМАРТФОНИ (Ширина екрана менше 768px) */
+/* =======================================================
+   ОСНОВНА ШАПКА (ДЕ С К Т О П)
+   ======================================================= */
+.ios-header {
+    width: 100%;
+    background: var(--header-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-color);
+    box-sizing: border-box;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.ios-header h1 {
+    font-size: 1.4rem;
+    margin: 0;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.ios-nav {
+    display: flex;
+    gap: 8px;
+}
+
+.nav-item {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 6px 12px;
+    border-radius: 10px;
+    transition: background 0.25s, color 0.25s;
+}
+
+.nav-item:hover, .nav-item.active {
+    color: var(--link-color);
+    background: rgba(229, 173, 190, 0.12);
+}
+
+.theme-switch-container {
+    display: flex;
+    align-items: center;
+}
+
+/* =======================================================
+   АДАПТАЦІЯ ШАПКИ ПІД МОБІЛЬНІ ПРИСТРОЇ (ТЕЛЕФОНИ)
+   ======================================================= */
 @media (max-width: 768px) {
-    /* Хедер стає компактнішим */
-    .header-content {
-        flex-direction: column;
-        gap: 15px;
-        padding: 10px;
+    .ios-header {
+        padding: 10px 0;
     }
 
-    .ios-nav {
+    .header-content {
+        flex-direction: row !important; /* Тримаємо назву та перемикач в один рядок */
         flex-wrap: wrap;
-        justify-content: center;
-        gap: 8px;
+        padding: 0 16px;
+        gap: 4px;
+    }
+
+    .ios-header h1 {
+        font-size: 1.2rem !important;
+    }
+
+    /* Акуратний мобільний перемикач тем */
+    .ios-switch {
+        width: 44px;
+        height: 24px;
+    }
+    .ios-slider:before {
+        height: 20px;
+        width: 20px;
+        left: 1px;
+        bottom: 1px;
+    }
+    input:checked + .ios-slider:before {
+        transform: translateX(20px);
+    }
+
+    /* Навігація на телефоні: переноситься під назву, стає красивою стрічкою */
+    .ios-nav {
+        width: 100%;
+        justify-content: space-between; /* Рівномірно розподіляємо кнопки по ширині екрана */
+        gap: 2px;
+        margin-top: 10px;
+        border-top: 1px solid var(--border-color);
+        padding-top: 8px;
     }
 
     .nav-item {
-        font-size: 0.9rem;
-        padding: 6px 10px;
-    }
-
-    /* Картка "Про мене" стає вертикальною, а контент центрується */
-    .creative-profile {
-        flex-direction: column;
+        font-size: 0.72rem; /* Оптимальний розмір для iPhone, щоб нічого не злипалося */
+        padding: 6px 6px;
+        border-radius: 8px;
+        flex: 1; /* Змушує вкладки ділити простір порівну */
         text-align: center;
-        padding: 25px;
-        gap: 20px;
-    }
-
-    .bio-content {
-        text-align: center;
-    }
-
-    .tags-container, 
-    .social-links-container {
-        justify-content: center;
-    }
-
-    /* Таблиця отримує горизонтальний скрол, щоб не вилазити за екран */
-    .table-container {
-        width: 100%;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    .ios-table {
-        min-width: 500px; /* Примусово тримає читабельний розмір */
-    }
-
-    /* Фільми вишикуються по 2 в ряд замість 5 */
-    .movies-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-    }
-
-    /* Картки настрою стають вертикальними (одна під одною) */
-    .mood-cards-container {
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-    }
-
-    .flip-card {
-        width: 100%;
-        max-width: 280px;
-        height: 260px;
-    }
-}
-
-/* 3. МАЛЕНЬКІ ТЕЛЕФОНИ (Ширина екрана менше 480px) */
-@media (max-width: 480px) {
-    .glass-panel {
-        padding: 20px;
-        border-radius: 20px;
-    }
-
-    .profile-pic {
-        width: 140px;
-        height: 140px;
-        border-radius: 30px;
-    }
-
-    .bio-content .greeting {
-        font-size: 1.7rem;
-    }
-
-    /* Фільми стають по 1 в ряд для зручності */
-    .movies-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .slider-wrapper {
-        height: 280px; /* Зменшуємо висоту слайдера під маленькі екрани */
-    }
-
-    .slider-btn {
-        padding: 10px 14px;
-        font-size: 1rem;
+        white-space: nowrap; /* Забороняє перенесення слів на два рядки */
     }
 }
