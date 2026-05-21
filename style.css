@@ -226,7 +226,7 @@ input:checked + .ios-slider:before {
 /* Переворот із затримкою у 6 секунд під час утримання */
 .flip-card:hover .flip-card-inner {
     transform: rotateY(180deg);
-    transition-delay: 1s; 
+    transition-delay: s; 
 }
 .flip-card-front, .flip-card-back {
     position: absolute;
@@ -289,23 +289,45 @@ input:checked + .ios-slider:before {
 
 .ios-footer { border-radius: 0; border: none; border-top: 1px solid var(--border-color); background: var(--header-bg); margin-bottom: 0; }
 /* =======================================================
-   ГЛОБАЛЬНІ НАЛАШТУВАННЯ ДЛЯ ПРАВИЛЬНОЇ ШИРИНИ
+   1. БАЗОВІ НАЛАШТУВАННЯ ТА ВІДСТУП ПІД ФІКСОВАНУ ШАПКУ
    ======================================================= */
-html, body {
+html {
     max-width: 100%;
-    overflow-x: hidden; /* Повністю блокує появу бічного скролу на телефонах */
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--ios-font-stack);
+    margin: 0;
+    
+    /* ВАЖЛИВО: Додаємо відступ зверху на телефонах (110px), щоб контент не ховався під дворядкову мобільну шапку */
+    padding: 110px 0 0 0; 
+    
+    background-color: var(--bg-color);
+    background-image: var(--bg-image);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: var(--text-color);
+    transition: background-color 0.4s ease, color 0.4s ease;
+    overflow-x: hidden;
 }
 
 /* =======================================================
-   ОСНОВНА ШАПКА (ДЕ С К Т О П)
+   2. ШАПКА ДЛЯ ТЕЛЕФОНІВ (MOBILE FIRST - ТЕПЕР ЗАВЖДИ ВИСИТЬ)
    ======================================================= */
 .ios-header {
     width: 100%;
     background: var(--header-bg);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    position: sticky;
+    
+    /* Змінили на fixed — тепер вона 100% зафіксована вгорі екрана */
+    position: fixed; 
     top: 0;
+    left: 0;
     z-index: 1000;
     padding: 10px 0;
     border-bottom: 1px solid var(--border-color);
@@ -314,16 +336,17 @@ html, body {
 
 .header-content {
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 16px;
+    width: 100%;
     box-sizing: border-box;
 }
 
 .ios-header h1 {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     margin: 0;
     font-weight: 700;
     letter-spacing: -0.5px;
@@ -331,16 +354,24 @@ html, body {
 
 .ios-nav {
     display: flex;
-    gap: 8px;
+    width: 100%;
+    justify-content: space-between;
+    gap: 2px;
+    margin-top: 10px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 8px;
 }
 
 .nav-item {
+    flex: 1;
+    text-align: center;
     text-decoration: none;
     color: var(--text-color);
     font-weight: 500;
-    font-size: 0.9rem;
-    padding: 6px 12px;
-    border-radius: 10px;
+    font-size: 0.72rem;
+    padding: 6px 2px;
+    border-radius: 8px;
+    white-space: nowrap;
     transition: background 0.25s, color 0.25s;
 }
 
@@ -354,56 +385,61 @@ html, body {
     align-items: center;
 }
 
+
 /* =======================================================
-   АДАПТАЦІЯ ШАПКИ ПІД МОБІЛЬНІ ПРИСТРОЇ (ТЕЛЕФОНИ)
+   3. АДАТАЦІЯ ДЛЯ ПЛАНШЕТІВ (Екрани більше 768px)
    ======================================================= */
-@media (max-width: 768px) {
+@media (min-width: 768px) {
+    body {
+        /* На планшетах шапка стає вужчою (в один рядок), тому зменшуємо відступ */
+        padding-top: 75px; 
+    }
     .ios-header {
-        padding: 10px 0;
+        padding: 12px 0;
     }
-
     .header-content {
-        flex-direction: row !important; /* Тримаємо назву та перемикач в один рядок */
-        flex-wrap: wrap;
-        padding: 0 16px;
-        gap: 4px;
+        padding: 0 24px;
     }
-
     .ios-header h1 {
-        font-size: 1.2rem !important;
+        font-size: 1.4rem;
     }
-
-    /* Акуратний мобільний перемикач тем */
-    .ios-switch {
-        width: 44px;
-        height: 24px;
-    }
-    .ios-slider:before {
-        height: 20px;
-        width: 20px;
-        left: 1px;
-        bottom: 1px;
-    }
-    input:checked + .ios-slider:before {
-        transform: translateX(20px);
-    }
-
-    /* Навігація на телефоні: переноситься під назву, стає красивою стрічкою */
     .ios-nav {
-        width: 100%;
-        justify-content: space-between; /* Рівномірно розподіляємо кнопки по ширині екрана */
-        gap: 2px;
-        margin-top: 10px;
-        border-top: 1px solid var(--border-color);
-        padding-top: 8px;
+        width: auto;
+        border-top: none;
+        padding-top: 0;
+        margin-top: 0;
+        gap: 6px;
     }
-
     .nav-item {
-        font-size: 0.72rem; /* Оптимальний розмір для iPhone, щоб нічого не злипалося */
-        padding: 6px 6px;
-        border-radius: 8px;
-        flex: 1; /* Змушує вкладки ділити простір порівну */
-        text-align: center;
-        white-space: nowrap; /* Забороняє перенесення слів на два рядки */
+        flex: none;
+        font-size: 0.85rem;
+        padding: 6px 12px;
+    }
+}
+
+
+/* =======================================================
+   4. АДАТАЦІЯ ДЛЯ ДЕСКТОПІВ (Екрани більше 1024px)
+   ======================================================= */
+@media (min-width: 1024px) {
+    body {
+        /* Відступ під велику десктопну однорядкову шапку */
+        padding-top: 85px; 
+    }
+    .header-content {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+    .ios-header h1 {
+        font-size: 1.5rem;
+    }
+    .ios-nav {
+        gap: 12px;
+    }
+    .nav-item {
+        font-size: 0.92rem;
+        padding: 8px 14px;
+        border-radius: 12px;
     }
 }
