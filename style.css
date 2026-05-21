@@ -168,9 +168,9 @@ input:checked + .ios-slider:before {
 .social-links-container { display: flex; gap: 15px; margin-top: 20px; }
 .social-btn { width: 45px; height: 45px; border-radius: 50%; color: white!important; font-size: 1.3rem; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: transform 0.3s; }
 .social-btn:hover { transform: translateY(-3px); }
-.gmail-btn { background-color: #db4437; }
-.insta-btn { background-color: #e4405f; }
-.tg-btn { background-color: #0088cc; }
+.gmail-btn { background-color: #e0db9d; }
+.insta-btn { background-color: #cb97a1; }
+.tg-btn { background-color: #000000; }
 
 /* Таблиця */
 .ios-table { width: 100%; border-collapse: collapse; border-radius: 15px; overflow: hidden; margin-top: 20px; }
