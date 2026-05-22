@@ -376,42 +376,34 @@ body {
   }
 }
 @media (max-width: 768px) {
-    .bio-content h2, .greeting {
-        font-size: 1.6rem !important; /* Зменшуємо розмір, щоб помістилося в один-два рядки */
+    
+    /* 1. Перебудовуємо картку "Про мене" у вертикальний стовпчик */
+    .creative-profile {
+        flex-direction: column !important; /* Картинка стане зверху, а текст під нею */
+        align-items: center !important;    /* Центруємо все по середині */
+        padding: 24px 16px !important;    /* Додаємо м'які внутрішні відступи, щоб текст не тулився до країв */
+        gap: 20px !important;             /* Робимо гарну відстань між фото та текстом */
     }
-    h1 {
-        font-size: 1.4rem !important;
+
+    /* 2. Вирівнюємо текстовий блок по центру */
+    .bio-content {
+        width: 100% !important;           /* Дозволяємо тексту зайняти всю ширину панелі */
+        text-align: center !important;    /* Центруємо опис */
+    }
+
+    /* 3. Центруємо кольорові теги та кнопки соцмереж на телефоні */
+    .tags-container, 
+    .social-links-container {
+        justify-content: center !important;
+    }
+    
+    /* Захист від вилізання довгих слів у майбутньому */
+    .bio-content p {
+        overflow-wrap: break-word;
+        word-break: break-word;
+        margin: 15px 0;
     }
 }
-
-/*для планшетів */
-@media (min-width: 768px) {
-    body {
-        padding-top: 75px; 
-    }
-    .ios-header {
-        padding: 12px 0;
-    }
-    .header-content {
-        padding: 0 24px;
-    }
-    .ios-header h1 {
-        font-size: 1.4rem;
-    }
-    .ios-nav {
-        width: auto;
-        border-top: none;
-        padding-top: 0;
-        margin-top: 0;
-        gap: 6px;
-    }
-    .nav-item {
-        flex: none;
-        font-size: 0.85rem;
-        padding: 6px 12px;
-    }
-}
-
 
 /*для декстопу */
 @media (min-width: 1024px) {
